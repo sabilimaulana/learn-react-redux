@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BootstrapTable from "react-bootstrap-table-next";
-import { Button, Col, Container, Row } from "reactstrap";
+import { Button, Col, Container, Row, Spinner } from "reactstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
@@ -68,44 +68,54 @@ const defaultSorted = [
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users.users,
+    users: state.users.getUsersList,
+    errorUsers: state.users.errorUsersList,
   };
 };
 
-const TableComponent = ({ users }) => {
+const TableComponent = ({ users, errorUsers }) => {
   return (
     <Container>
-      <ToolkitProvider
-        keyField="id"
-        data={users}
-        columns={columns}
-        defaultSorted={defaultSorted}
-        search
-      >
-        {(props) => (
-          <div>
-            <Row>
-              <Col>
-                <Link to="/create">
-                  <Button color="dark">
-                    <FontAwesomeIcon icon={faUserPlus} /> Create User
-                  </Button>
-                </Link>
-              </Col>
-              <Col>
-                <div className="float-end mb-2">
-                  <SearchBar placeholder="Search ..." {...props.searchProps} />
-                </div>
-              </Col>
-            </Row>
+      {users ? (
+        <ToolkitProvider
+          keyField="id"
+          data={users}
+          columns={columns}
+          defaultSorted={defaultSorted}
+          search
+        >
+          {(props) => (
+            <div>
+              <Row>
+                <Col>
+                  <Link to="/create">
+                    <Button color="dark">
+                      <FontAwesomeIcon icon={faUserPlus} /> Create User
+                    </Button>
+                  </Link>
+                </Col>
+                <Col>
+                  <div className="float-end mb-2">
+                    <SearchBar
+                      placeholder="Search ..."
+                      {...props.searchProps}
+                    />
+                  </div>
+                </Col>
+              </Row>
 
-            <BootstrapTable
-              {...props.baseProps}
-              pagination={paginationFactory()}
-            />
-          </div>
-        )}
-      </ToolkitProvider>
+              <BootstrapTable
+                {...props.baseProps}
+                pagination={paginationFactory()}
+              />
+            </div>
+          )}
+        </ToolkitProvider>
+      ) : (
+        <div className="text-center">
+          {errorUsers ? <h3>{errorUsers}</h3> : <Spinner color="dark" />}
+        </div>
+      )}
     </Container>
   );
 };

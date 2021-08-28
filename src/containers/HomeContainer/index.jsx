@@ -1,7 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { getUsersList } from "../../actions/userAction";
 import TableComponent from "../../components/TableComponent";
 
-function HomeContainer() {
+function HomeContainer({ dispatch }) {
+  useEffect(() => {
+    dispatch(getUsersList());
+  }, [dispatch]);
+
   return (
     <>
       <TableComponent />
@@ -9,4 +16,4 @@ function HomeContainer() {
   );
 }
 
-export default HomeContainer;
+export default connect()(HomeContainer);
