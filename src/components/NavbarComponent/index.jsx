@@ -24,11 +24,8 @@ const NavbarComponent = (props) => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
-                  About Us
+                <NavLink href="https://github.com/sabilimaulana/learn-react-redux">
+                  Source Code
                 </NavLink>
               </NavItem>
             </Nav>

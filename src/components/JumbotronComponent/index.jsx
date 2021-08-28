@@ -16,9 +16,11 @@ const JumbotronComponent = (props) => {
           <hr className="my-2" />
 
           <p className="lead">
-            <Button color="dark">
-              <FontAwesomeIcon icon={faInfo} /> Learn More
-            </Button>
+            <a href="https://github.com/sabilimaulana/learn-react-redux">
+              <Button color="dark">
+                <FontAwesomeIcon icon={faInfo} /> Learn More
+              </Button>
+            </a>
           </p>
         </Container>
       </Jumbotron>

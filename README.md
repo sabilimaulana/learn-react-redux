@@ -1,3 +1,6 @@
+- Thanks to Wahidev Academy
+- Tutorial Video https://www.youtube.com/playlist?list=PLIan8aHxsPj1n-fDYopnjbaK55DhZqrmN
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
