@@ -1,10 +1,10 @@
 import React from "react";
 import TableComponent from "../../components/TableComponent";
 
-function HomeContainer({ users }) {
+function HomeContainer() {
   return (
     <>
-      <TableComponent users={users} />
+      <TableComponent />
     </>
   );
 }

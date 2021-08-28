@@ -10,6 +10,7 @@ import { Button, Col, Container, Row } from "reactstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const { SearchBar } = Search;
 const columns = [
@@ -65,6 +66,12 @@ const defaultSorted = [
   },
 ];
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users.users,
+  };
+};
+
 const TableComponent = ({ users }) => {
   return (
     <Container>
@@ -103,4 +110,4 @@ const TableComponent = ({ users }) => {
   );
 };
 
-export default TableComponent;
+export default connect(mapStateToProps, null)(TableComponent);
