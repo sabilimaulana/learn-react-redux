@@ -98,3 +98,15 @@ export const postUserCreate = (data) => {
       });
   };
 };
+
+export const deleteCreatedUser = () => {
+  return (dispatch) => {
+    dispatch({
+      type: POST_USER_CREATE,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};
