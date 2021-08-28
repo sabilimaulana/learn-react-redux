@@ -11,53 +11,29 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import swal from "sweetalert";
+import { deleteUser } from "../../actions/userAction";
+
+const handleDelete = (dispatch, id) => {
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this user data!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      dispatch(deleteUser(id));
+      swal("Poof! Your user data has been deleted!", {
+        icon: "success",
+      });
+    } else {
+      swal("Your user data is safe!");
+    }
+  });
+};
 
 const { SearchBar } = Search;
-const columns = [
-  {
-    dataField: "id",
-    text: "ID",
-    sort: true,
-    headerStyle: () => {
-      return { width: "5%" };
-    },
-  },
-  {
-    dataField: "nama",
-    text: "Nama",
-    sort: true,
-  },
-  {
-    dataField: "alamat",
-    text: "Alamat",
-    sort: true,
-  },
-  {
-    dataField: "link",
-    text: "Action",
-    formatter: (rowContent, row) => {
-      return (
-        <div>
-          <Link to={`/detail/${row.id}`}>
-            <Button color="dark" className="me-2">
-              <FontAwesomeIcon icon={faInfo} /> Detail
-            </Button>
-          </Link>
-
-          <Link to={`/edit/${row.id}`}>
-            <Button color="dark" className="me-2">
-              <FontAwesomeIcon icon={faEdit} /> Edit
-            </Button>
-          </Link>
-
-          <Button color="dark" className="me-2">
-            <FontAwesomeIcon icon={faTrash} /> Delete
-          </Button>
-        </div>
-      );
-    },
-  },
-];
 
 const defaultSorted = [
   {
@@ -73,7 +49,57 @@ const mapStateToProps = (state) => {
   };
 };
 
-const TableComponent = ({ users, errorUsers }) => {
+const TableComponent = ({ users, errorUsers, dispatch }) => {
+  const columns = [
+    {
+      dataField: "id",
+      text: "ID",
+      sort: true,
+      headerStyle: () => {
+        return { width: "5%" };
+      },
+    },
+    {
+      dataField: "nama",
+      text: "Nama",
+      sort: true,
+    },
+    {
+      dataField: "alamat",
+      text: "Alamat",
+      sort: true,
+    },
+    {
+      dataField: "link",
+      text: "Action",
+      formatter: (rowContent, row) => {
+        return (
+          <div>
+            <Link to={`/detail/${row.id}`}>
+              <Button color="dark" className="me-2">
+                <FontAwesomeIcon icon={faInfo} /> Detail
+              </Button>
+            </Link>
+
+            <Link to={`/edit/${row.id}`}>
+              <Button color="dark" className="me-2">
+                <FontAwesomeIcon icon={faEdit} /> Edit
+              </Button>
+            </Link>
+
+            <Button
+              color="dark"
+              className="me-2"
+              onClick={() => handleDelete(dispatch, row.id)}
+            >
+              <FontAwesomeIcon icon={faTrash} /> Delete
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <Container>
       {users ? (

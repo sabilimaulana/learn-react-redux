@@ -113,7 +113,6 @@ export const deleteCreatedUser = () => {
 };
 
 export const putUserUpdate = (data, userId) => {
-  console.log("update");
   return (dispatch) => {
     axios
       .put(
@@ -138,6 +137,21 @@ export const putUserUpdate = (data, userId) => {
             errorMessage: error.message,
           },
         });
+      });
+  };
+};
+
+export const deleteUser = (userId) => {
+  return (dispatch) => {
+    axios
+      .delete(
+        `https://my-json-server.typicode.com/sabilimaulana/sbl-jsonplaceholder/users/${userId}`
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };
