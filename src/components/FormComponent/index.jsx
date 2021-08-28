@@ -4,6 +4,15 @@ import { Col, FormGroup, Input, Label, Row, Button } from "reactstrap";
 import { Field, reduxForm } from "redux-form";
 import { UserValidation } from "../../validations/UserValidation";
 
+function mapStateToProps(state) {
+  return {
+    initialValues: {
+      nama: state.users.getUserDetail.nama,
+      alamat: state.users.getUserDetail.alamat,
+    },
+  };
+}
+
 const renderField = ({
   input,
   type,
@@ -81,4 +90,4 @@ FormComponent = reduxForm({
   enableReinitialize: true,
 })(FormComponent);
 
-export default connect()(FormComponent);
+export default connect(mapStateToProps, null)(FormComponent);

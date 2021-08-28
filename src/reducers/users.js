@@ -2,6 +2,7 @@ import {
   GET_USERS_LIST,
   GET_USER_DETAIL,
   POST_USER_CREATE,
+  PUT_USER_UPDATE,
 } from "../actions/userAction";
 
 let initialState = {
@@ -28,6 +29,12 @@ const users = (state = initialState, action) => {
         errorUserDetail: action.payload.errorMessage,
       };
     case POST_USER_CREATE:
+      return {
+        ...state,
+        getResponseDataUser: action.payload.data,
+        errorResponseDataUser: action.payload.errorMessage,
+      };
+    case PUT_USER_UPDATE:
       return {
         ...state,
         getResponseDataUser: action.payload.data,
